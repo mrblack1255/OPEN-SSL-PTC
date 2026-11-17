@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RX._-.RABBI</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden;font-family:monospace;height:100vh}
+/* RX RABBI EFFECT - PURA SCREEN E */
+.full-vfx{position:fixed;inset:0;animation:rxEffect 2.5s infinite, fullShake 5s infinite;z-index:1;pointer-events:none}
+@keyframes rxEffect{
+0%,88%{filter:none;transform:translate(0)}
+89%{filter:hue-rotate(90deg) saturate(3);transform:translate(-3px,2px)}
+90%{filter:invert(1) contrast(2);transform:translate(3px,-2px)}
+91%{filter:hue-rotate(180deg) blur(1px);transform:translate(-2px,-2px)}
+92%{filter:saturate(5) hue-rotate(270deg);transform:translate(0)}
+93%,100%{filter:none;transform:translate(0)}
+}
+@keyframes fullShake{0%,92%,100%{transform:translate(0)}93%{transform:translate(-2px,1px)}94%{transform:translate(2px,-1px)}95%{transform:translate(0)}}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.15) 0px,rgba(0,0,0,0.15) 1px,transparent 1px,transparent 3px)}
+.led-border{position:fixed;inset:8px;border:2px solid #0f0;border-radius:20px;pointer-events:none;z-index:20;box-shadow:0 0 20px #0f0, inset 0 0 30px #0f0;animation:ledBlink 1.2s infinite alternate}
+@keyframes ledBlink{0%{box-shadow:0 0 10px #0f0, inset 0 0 15px #0f0;border-color:#0f0}50%{box-shadow:0 0 30px #ff0000, inset 0 0 30px #ff0000;border-color:#ff0000}100%{box-shadow:0 0 20px #00ffff, inset 0 0 20px #00ffff;border-color:#00ffff}}
+canvas{position:fixed;inset:0}
+.center{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:10;width:92%;animation:centerRx 2.5s infinite}
+@keyframes centerRx{0%,88%{filter:none;transform:translate(-50%,-50%)}89%{filter:hue-rotate(90deg);transform:translate(-52%,-50%)}90%{filter:invert(1);transform:translate(-48%,-50%)}91%{filter:hue-rotate(180deg) blur(1px);transform:translate(-50%,-52%)}92%,100%{filter:none;transform:translate(-50%,-50%)}}
+.logo{font-size:clamp(38px,9vw,85px);font-weight:900;color:#fff;text-shadow:0 0 10px red,0 0 25px red,0 0 50px red;animation:glitch 1.5s infinite, logoPulse 2s infinite}
+@keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes glitch{0%,90%{text-shadow:0 0 10px red,0 0 25px red}92%{text-shadow:-4px 0 cyan,4px 0 red; transform:translateX(-3px)}94%{text-shadow:4px 0 cyan,-4px 0 red; transform:translateX(3px)}96%{text-shadow:0 0 20px #0f0}98%{text-shadow:0 0 10px red,0 0 25px red}}
+.sub{color:#0f0;font-size:clamp(14px,4vw,20px);margin-top:8px;text-shadow:0 0 10px #0f0;min-height:24px;animation:textRx 2.5s infinite}
+@keyframes textRx{0%,88%{filter:none}89%{filter:invert(1)}90%{filter:hue-rotate(180deg)}91%,100%{filter:none}}
+.sub::after{content:"|";color:red;animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.led-row{display:flex;justify-content:center;gap:10px;margin:18px 0}
+.led{width:14px;height:14px;border-radius:50%;background:#0f0;box-shadow:0 0 15px #0f0;animation:ledDot .8s infinite alternate}
+.led:nth-child(2){background:red;box-shadow:0 0 15px red;animation-delay:.2s}
+.led:nth-child(3){background:#00ffff;box-shadow:0 0 15px #00ffff;animation-delay:.4s}
+.led:nth-child(4){background:yellow;box-shadow:0 0 15px yellow;animation-delay:.6s}
+.led:nth-child(5){background:#ff00ff;box-shadow:0 0 15px #ff00ff;animation-delay:.8s}
+@keyframes ledDot{from{transform:scale(.7);opacity:.5}to{transform:scale(1.3);opacity:1}}
+.scan{position:fixed;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,red,transparent);box-shadow:0 0 20px red;z-index:15;animation:scanMove 3s linear infinite}
+@keyframes scanMove{0%{top:0}100%{top:100%}}
+.cards{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.card{background:rgba(255,0,0,0.08);border:1px solid red;color:white;padding:10px 14px;border-radius:12px;font-size:13px;backdrop-filter:blur(5px);animation:cardGlow 2s infinite alternate, cardRx 2.5s infinite}
+@keyframes cardRx{0%,88%{filter:none;transform:translateY(0)}89%{filter:hue-rotate(90deg);transform:translateY(-3px)}90%{filter:invert(1);transform:translateY(3px)}91%,100%{filter:none;transform:translateY(0)}}
+@keyframes cardGlow{from{box-shadow:0 0 5px red}to{box-shadow:0 0 20px red}}
+.btn-row{display:flex;justify-content:center;gap:12px;margin-top:18px}
+button{width:58px;height:58px;border-radius:50%;border:none;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:btnRx 2.5s infinite}
+@keyframes btnRx{0%,88%{filter:none;transform:scale(1)}89%{filter:hue-rotate(180deg) brightness(1.5);transform:scale(1.12) rotate(4deg)}90%{filter:invert(1);transform:scale(1)}91%,100%{filter:none;transform:scale(1)}}
+button:active{transform:scale(0.9)}
+.b4{background:red;box-shadow:0 0 25px red}
+.footer{margin-top:14px;color:#888;font-size:12px;letter-spacing:1px}
+.particle{position:fixed;width:4px;height:4px;background:#0f0;border-radius:50%;box-shadow:0 0 10px #0f0;pointer-events:none;z-index:5;animation:particleFloat 5s linear infinite}
+@keyframes particleFloat{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-20px) translateX(50px);opacity:0}}
+</style>
+</head>
+<body>
+<div class="full-vfx"></div>
+<div class="led-border"></div>
+<div class="scan"></div>
+<canvas id="c"></canvas>
+<div class="particle" style="left:10%;animation-delay:0s;background:red;box-shadow:0 0 10px red"></div>
+<div class="particle" style="left:25%;animation-delay:1s"></div>
+<div class="particle" style="left:45%;animation-delay:2s;background:#00ffff;box-shadow:0 0 10px #00ffff"></div>
+<div class="particle" style="left:65%;animation-delay:0.5s;background:yellow;box-shadow:0 0 10px yellow"></div>
+<div class="particle" style="left:85%;animation-delay:1.5s;background:#ff00ff;box-shadow:0 0 10px #ff00ff"></div>
+
+<div class="center">
+<div class="logo">RX._-.RABBI</div>
+<div class="sub" id="typeText"></div>
+<div class="led-row"><div class="led"></div><div class="led"></div><div class="led"></div><div class="led"></div><div class="led"></div></div>
+<div class="cards">
+<div class="card">🔴<br>HACKER</div>
+<div class="card">🟢<br>VOID</div>
+<div class="card">⚡<br>TERMINAL</div>
+<div class="card">👁️<br>CREATOR</div>
+</div>
+
+<div class="btn-row">
+<button class="b4" onclick="boost()">⚡</button>
+</div>
+
+<div class="footer">MADE BY RX DANGER | RX-RABBI © 2026<br>Chup Chap Thaki, Kintu Void Theke Dekhi.</div>
+</div>
+
+<script>
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;
+const chars="RX._-.RABBIöラッピ𝔇𝔛01//#@";
+const fs=18;
+let drops=[];
+for(let i=0;i<Math.floor(canvas.width/fs);i++) drops[i]=Math.random()*-100;
+let speed=33;
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.08)";ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.font=fs+"px monospace";
+for(let i=0;i<drops.length;i++){
+let t=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillStyle=Math.random()>0.92?"#FF0000":Math.random()>0.85?"#00FFFF":"#00FF00";
+ctx.fillText(t,i*fs,drops[i]*fs);
+if(drops[i]*fs>canvas.height && Math.random()>0.975) drops[i]=0;
+drops[i]++;
+}
+}
+let timer=setInterval(draw,speed);
+function boost(){clearInterval(timer);speed=10;timer=setInterval(draw,speed);setTimeout(()=>{clearInterval(timer);speed=33;timer=setInterval(draw,speed)},3000);}
+const texts=["> VOID PROTOCOL ACTIVATED_ // ö [ ラッピ ]","> HACKING SYSTEM BY RX._-.RABBI...","> CREATED BY RX._-.RABBI_"];
+let ti=0, ci=0; const el=document.getElementById("typeText");
+function typeWriter(){ let cur=texts[ti]; if(ci<=cur.length){ el.textContent=cur.slice(0,ci); ci++; setTimeout(typeWriter,60); } else { setTimeout(()=>{ti=(ti+1)%texts.length;ci=0;typeWriter()},1800); } }
+typeWriter();
+addEventListener("resize",()=>{canvas.width=innerWidth;canvas.height=innerHeight});
+</script>
+</body>
+</html>
